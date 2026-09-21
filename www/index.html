@@ -42,99 +42,10 @@
   </button>
 
   <div id="status">
-    جاري تجهيز OneSignal...
+    جاري تشغيل OneSignal...
   </div>
 
-  <script type="module">
-    import OneSignal from '@onesignal/capacitor-plugin';
-
-    const APP_ID = '94110f41-5110-46d1-8b75-351f4916327a';
-
-    const status = document.getElementById('status');
-    const button = document.getElementById('pushButton');
-
-    async function startOneSignal() {
-      try {
-        await OneSignal.initialize(APP_ID);
-
-        status.textContent = 'OneSignal جاهز ✅';
-      } catch (error) {
-        console.error(error);
-        status.textContent = 'حدث خطأ في OneSignal ❌';
-      }
-    }
-
-    button.addEventListener('click', async () => {
-      try {
-        const allowed =
-          await OneSignal.Notifications.requestPermission(true);
-
-        if (allowed) {
-          status.textContent =
-            'تم السماح بالإشعارات ✅';
-        } else {
-          status.textContent =
-            'لم يتم السماح بالإشعارات ❌';
-        }
-      } catch (error) {
-        console.error(error);
-        status.textContent =
-          'حدث خطأ أثناء طلب الإذن ❌';
-      }
-    });
-
-    startOneSignal();
-  </script>
-
-</body>
-</html>
-  <p>اختبار إشعارات برشلونة</p>
-
-  <button id="pushButton">
-    🔔 تفعيل الإشعارات
-  </button>
-
-  <div id="status">
-    الإشعارات غير مفعلة
-  </div>
-
-  <script type="module">
-    import { OneSignal } from '@onesignal/capacitor-plugin';
-
-    const APP_ID = '94110f41-5110-46d1-8b75-351f4916327a';
-
-    const status = document.getElementById('status');
-    const button = document.getElementById('pushButton');
-
-    try {
-      OneSignal.initialize(APP_ID);
-
-      status.textContent = 'OneSignal جاهز ✅';
-    } catch (error) {
-      status.textContent = 'حدث خطأ في OneSignal ❌';
-      console.error(error);
-    }
-
-    button.addEventListener('click', async () => {
-      try {
-        const permission =
-          await OneSignal.Notifications.requestPermission(true);
-
-        if (permission) {
-          status.textContent =
-            'تم السماح بالإشعارات ✅';
-        } else {
-          status.textContent =
-            'لم يتم السماح بالإشعارات ❌';
-        }
-      } catch (error) {
-        status.textContent =
-          'حدث خطأ أثناء طلب الإذن ❌';
-
-        console.error(error);
-      }
-    });
-  </script>
+  <script type="module" src="/src/main.js"></script>
 
 </body>
 </html>
