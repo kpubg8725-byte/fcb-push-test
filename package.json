@@ -1,0 +1,13 @@
+{
+  "name": "fcb-push-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo build"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0"
+  }
+}
