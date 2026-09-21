@@ -21,8 +21,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Install dependencies
-        run: npm install
-
+  run: |
+    npm install
+    npm install @onesignal/capacitor-plugin
       - name: Add Android
         run: npx cap add android
 
