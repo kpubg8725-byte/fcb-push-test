@@ -7,8 +7,7 @@ const button = document.getElementById('pushButton');
 
 async function startOneSignal() {
   try {
-    await OneSignal.initialize(APP_ID);
-
+    await OneSignal.initialize({ appId: APP_ID });
     status.textContent = 'OneSignal جاهز ✅';
   } catch (error) {
     console.error(error);
