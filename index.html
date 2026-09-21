@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCB Push Test</title>
+</head>
+
+<body>
+  <h1>FCB Push Test</h1>
+  <p>تطبيق اختبار إشعارات برشلونة</p>
+
+  <button onclick="requestPush()">
+    تفعيل الإشعارات
+  </button>
+
+  <p id="status">الإشعارات غير مفعلة</p>
+
+  <script>
+    function requestPush() {
+      document.getElementById("status").innerText =
+        "سيتم تفعيل الإشعارات من OneSignal...";
+    }
+  </script>
+</body>
+</html>
