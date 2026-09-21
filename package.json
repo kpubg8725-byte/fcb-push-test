@@ -6,12 +6,11 @@
     "build": "echo build"
   },
   "dependencies": {
-  "@capacitor/core": "^8.0.0",
-  "@capacitor/android": "^8.0.0",
-  "@capacitor/cli": "^8.0.0"
-},
-"devDependencies": {
-  "typescript": "^5.9.3"
-}
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }
