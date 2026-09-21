@@ -4,23 +4,105 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FCB Push Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 18px;
+      margin-top: 25px;
+    }
+
+    #status {
+      margin-top: 25px;
+      line-height: 1.8;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>FCB Push Test</h1>
-  <p>تطبيق اختبار إشعارات برشلونة</p>
 
-  <button onclick="requestPush()">
-    تفعيل الإشعارات
+  <h1>🔵 FCB Push Test</h1>
+
+  <p>اختبار إشعارات برشلونة</p>
+
+  <button id="pushButton">
+    🔔 تفعيل الإشعارات
   </button>
 
-  <p id="status">الإشعارات غير مفعلة</p>
+  <p id="status">
+    جاري تجهيز OneSignal...
+  </p>
 
-  <script>
-    function requestPush() {
-      document.getElementById("status").innerText =
-        "سيتم تفعيل الإشعارات من OneSignal...";
+  <script type="module">
+    import OneSignal from '@onesignal/capacitor-plugin';
+
+    /*
+      ضع App ID الخاص بتطبيقك في OneSignal هنا
+    */
+    const APP_ID = 'ضع_APP_ID_هنا';
+
+    const status = document.getElementById('status');
+    const button = document.getElementById('pushButton');
+
+    async function startOneSignal() {
+      try {
+        await OneSignal.initialize(APP_ID);
+
+        status.textContent =
+          'OneSignal جاهز ✅';
+
+      } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+          'خطأ في تشغيل OneSignal ❌';
+      }
     }
+
+    button.addEventListener('click', async () => {
+
+      try {
+
+        const allowed =
+          await OneSignal.Notifications.requestPermission(true);
+
+        if (allowed) {
+
+          status.textContent =
+            'تم تفعيل الإشعارات ✅';
+
+        } else {
+
+          status.textContent =
+            'تم رفض إذن الإشعارات ❌';
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+          'حدث خطأ أثناء طلب الإذن ❌';
+      }
+
+    });
+
+    startOneSignal();
   </script>
+
 </body>
 </html>
