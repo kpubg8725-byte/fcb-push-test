@@ -4,9 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FCB Push Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: 0;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 18px;
+      margin-top: 25px;
+    }
+
+    #status {
+      margin-top: 25px;
+      line-height: 1.8;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>FCB Push Test</h1>
+
+  <h1>🔵 FCB Push Test</h1>
+
   <p>اختبار إشعارات برشلونة</p>
+
+  <button id="pushButton">
+    🔔 تفعيل الإشعارات
+  </button>
+
+  <div id="status">
+    الإشعارات غير مفعلة
+  </div>
+
+  <script type="module">
+    import { OneSignal } from '@onesignal/capacitor-plugin';
+
+    const APP_ID = 'ضع-ONE SIGNAL APP ID-هنا';
+
+    const status = document.getElementById('status');
+    const button = document.getElementById('pushButton');
+
+    try {
+      OneSignal.initialize(APP_ID);
+
+      status.textContent = 'OneSignal جاهز ✅';
+    } catch (error) {
+      status.textContent = 'حدث خطأ في OneSignal ❌';
+      console.error(error);
+    }
+
+    button.addEventListener('click', async () => {
+      try {
+        const permission =
+          await OneSignal.Notifications.requestPermission(true);
+
+        if (permission) {
+          status.textContent =
+            'تم السماح بالإشعارات ✅';
+        } else {
+          status.textContent =
+            'لم يتم السماح بالإشعارات ❌';
+        }
+      } catch (error) {
+        status.textContent =
+          'حدث خطأ أثناء طلب الإذن ❌';
+
+        console.error(error);
+      }
+    });
+  </script>
+
 </body>
 </html>
